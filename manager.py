@@ -9,10 +9,10 @@ app = Flask(__name__)
 
 
 class Config(object):
-    """封装配置类"""
+    """配置参数"""
     DEBUG = True
 
-
+# 加载配置参数
 app.config.from_object(Config)
 
 

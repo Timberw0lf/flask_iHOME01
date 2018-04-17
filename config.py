@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+# 配置参数
+
 import redis
 
 
@@ -28,3 +30,28 @@ class Config(object):
     SESSION_USE_SIGNER = True
     # 设置session的过期时间
     PERMANENT_SESSION_LIFETIME = 3600 * 24  # 有效期为一天
+
+
+# 为了让项目的配置文件能适应不同环境（开发、测试、线上），抽取不同环境下的配置到配置类的子类，
+# 让实例能根据当前开发环境继承配置子类达到选择不同的配置的目的，而不需要对
+class Development(Config):
+    """开发模式下的配置"""
+    pass
+
+
+class Production(Config):
+    """生产环境、上线、部署之后的配置"""
+
+    # 部署正式运行之后，就不能再用调试模式了
+    DEBUG = False
+
+    # 项目上线以后的mysql数据库：可能跟开发时的数据库不一样
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@127.0.0.1:3306/db_iHome'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+class UnitTest(Config):
+    """测试环境"""
+
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@127.0.0.1:3306/db_iHome_unittest'

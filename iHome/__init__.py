@@ -6,7 +6,7 @@ from flask import Flask,session
 from flask_session import Session
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.wtf import CSRFProtect
-from config import Config
+from config import Config, Development, Production, UnitTest
 
 app = Flask(__name__)
 

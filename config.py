@@ -60,3 +60,10 @@ class UnitTest(Config):
 
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@127.0.0.1:3306/db_iHome_unittest'
+
+# 工厂设计模式的工厂：
+configs = {
+    'dev': Development,
+    'prod': Production,
+    'test': UnitTest
+}
